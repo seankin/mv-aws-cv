@@ -1,0 +1,2114 @@
+[
+    {
+        "id": "19055804.82a728",
+        "type": "tab",
+        "label": "Titlebar",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "c0600a7e.657098",
+        "type": "tab",
+        "label": "MQTT Broker",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ea6cd974.87a928",
+        "type": "tab",
+        "label": "Luminosity Chart",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "61091657.7ee5f8",
+        "type": "tab",
+        "label": "People Count by Zone",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9ae91178.85918",
+        "type": "tab",
+        "label": "AWS Facial",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "1ebb5ce194f7fd37",
+        "type": "tab",
+        "label": "AWS PPE",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "fe39d94e.aff738",
+        "type": "tab",
+        "label": "AWS Label",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "bd3844a1.c393b8",
+        "type": "tab",
+        "label": "AWS Text",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "ad610aca.48e198",
+        "type": "tab",
+        "label": "Show Snap",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "22170bc2d615633b",
+        "type": "tab",
+        "label": "Snap 2",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "e9251f75a3308957",
+        "type": "tab",
+        "label": "SlideShow",
+        "disabled": false,
+        "info": "# **Dashboard slideshow**\r\n\r\nThis flow creates a slideshow in the Dashboard with pictures from a local directory in your computer. The slideshow is controlled by MQTT messages.\r\n\r\n\r\n## **Features**\r\n\r\n - You can play and pause the slideshow.\r\n - The time each picture displays is configurable in a delay node.\r\n - You can display a display any of the ten first pictures by sending an MQTT message.\r\n\r\n\r\n## **Prerequisites**\r\n\r\n - Requires the installation of contrib node: **fs-ops-dir**.\r\n - Requires access to an MQTT broker to publish/subcribe to commands.\r\n - Create directory /slideshow in Node-RED static floder and populate it with pictures.\r\n\r\n\r\n## **How it works**\r\n\r\nThe heart of the flow is a core template node that will format a message to display the picture as a background image.\r\n\r\nBelow the code inside this template node.\r\n\r\n```\r\n#Slide_Slideshow md-card {\r\n    background-image : url(/slideshow/{{payload}});\r\n    background-repeat: no-repeat;\r\n    background-position: center;\r\n    background-size: cover;\r\n}\r\n```\r\n\r\n\r\n## **Built and tested With**\r\n\r\n* [Node-RED]  - version 1.0.3\r\n* [Dashboard] - version 2.19.2 \r\n\r\n\r\n \r\n\r\n## **Authors**\r\n\r\n**Andrei Ochmat** \r\n\r\n\r\n## **License**\r\n\r\nFree for any kind of use\r\n\r\n## **Acknowledgments**\r\n\r\n* Possible thanks to the outstanding work of Nick O'Leary and Dave Conway-Jones\r\n\r\n"
+    },
+    {
+        "id": "eb90c25d.78d73",
+        "type": "subflow",
+        "name": "Persistence Helper",
+        "info": "",
+        "in": [
+            {
+                "x": 45.5,
+                "y": 85,
+                "wires": [
+                    {
+                        "id": "c16267f4.7bfdb8"
+                    }
+                ]
+            }
+        ],
+        "out": [
+            {
+                "x": 749.5,
+                "y": 53,
+                "wires": [
+                    {
+                        "id": "6ff67d7f.e50f64",
+                        "port": 0
+                    }
+                ]
+            },
+            {
+                "x": 755,
+                "y": 169,
+                "wires": [
+                    {
+                        "id": "a685b6d4.ee5098",
+                        "port": 0
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "679df91d.8517c8",
+        "type": "ui_group",
+        "name": "Default",
+        "tab": "",
+        "order": 1,
+        "disp": false,
+        "width": "24",
+        "collapse": false
+    },
+    {
+        "id": "b2fd4c0c.8b0d2",
+        "type": "mqtt-broker",
+        "name": "Meraki",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "Connection",
+        "birthQos": "0",
+        "birthPayload": "Meraki Connected",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "85a386ea.e008e8",
+        "type": "ui_group",
+        "name": "Light Levels",
+        "tab": "ac74fa43.681e68",
+        "order": 2,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "1ae8bac4.895bf5",
+        "type": "ui_group",
+        "name": "People Detection",
+        "tab": "ac74fa43.681e68",
+        "order": 1,
+        "disp": true,
+        "width": "8",
+        "collapse": false
+    },
+    {
+        "id": "2f647a84.4b28b6",
+        "type": "ui_group",
+        "name": "Face Detection",
+        "tab": "ac74fa43.681e68",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "8fbf59aa.45bee8",
+        "type": "ui_group",
+        "name": "Object Detection",
+        "tab": "ac74fa43.681e68",
+        "order": 5,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "58564007.5d9af",
+        "type": "ui_group",
+        "name": "Text Detection",
+        "tab": "ac74fa43.681e68",
+        "order": 6,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "4d7bb0a7.40b36",
+        "type": "ui_group",
+        "name": "Snapshot",
+        "tab": "fcdf3d52.06263",
+        "order": 7,
+        "disp": true,
+        "width": "27",
+        "collapse": true
+    },
+    {
+        "id": "ac74fa43.681e68",
+        "type": "ui_tab",
+        "name": "Analytics",
+        "icon": "visibility",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "fcdf3d52.06263",
+        "type": "ui_tab",
+        "name": "Snapshot",
+        "icon": "perm_media",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "5ceebb616fda2f31",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-custom",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#96c11f",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "customTheme": {
+                "name": "Protos",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "reset": false
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#4B7930",
+                    "value": "#4B7930",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": true
+                },
+                "page-backgroundColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#ff9200",
+                    "edited": true
+                },
+                "group-borderColor": {
+                    "value": "#555555",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#eeeeee",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#ff9200",
+                    "edited": true
+                },
+                "widget-borderColor": {
+                    "value": "#333333",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Protos Networks MV Demo",
+            "hideToolbar": "false",
+            "allowSwipe": "true",
+            "lockMenu": "false",
+            "allowTempTheme": "false",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "912b33317f443a9b",
+        "type": "mqtt-broker",
+        "name": "mosquitto",
+        "broker": "172.31.10.103",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e4238489fe0a9a63",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "sessionExpiry": ""
+    },
+    {
+        "id": "ded320e11037f2ec",
+        "type": "ui_group",
+        "name": "Snapshot",
+        "tab": "ac74fa43.681e68",
+        "order": 3,
+        "disp": true,
+        "width": "12",
+        "collapse": false
+    },
+    {
+        "id": "e47ba82f96e4d60e",
+        "type": "ui_group",
+        "name": "Information",
+        "tab": "ac74fa43.681e68",
+        "order": 7,
+        "disp": true,
+        "width": "16",
+        "collapse": false
+    },
+    {
+        "id": "8a140db745a77247",
+        "type": "Webex Teams Authentication",
+        "name": "Mv Demo"
+    },
+    {
+        "id": "e471610ce5ec3443",
+        "type": "Webex Teams Authentication",
+        "name": "Bot"
+    },
+    {
+        "id": "990a141f293e777a",
+        "type": "ui_tab",
+        "name": "About",
+        "icon": "dashboard",
+        "order": 3,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "8082143d.bef398",
+        "type": "ui_group",
+        "name": "About",
+        "tab": "5a4fc453.6dfebc",
+        "order": 1,
+        "disp": true,
+        "width": "23",
+        "collapse": true
+    },
+    {
+        "id": "5a4fc453.6dfebc",
+        "type": "ui_tab",
+        "name": "About",
+        "icon": "fa-book",
+        "order": 6,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "c7ee22c7c9476cdd",
+        "type": "ui_spacer",
+        "z": "bd3844a1.c393b8",
+        "name": "spacer",
+        "group": "1ae8bac4.895bf5",
+        "order": 3,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "09a4bfe15a462a3a",
+        "type": "ui_spacer",
+        "z": "bd3844a1.c393b8",
+        "name": "spacer",
+        "group": "85a386ea.e008e8",
+        "order": 4,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "6b07033f6f465dc7",
+        "type": "ui_spacer",
+        "z": "bd3844a1.c393b8",
+        "name": "spacer",
+        "group": "85a386ea.e008e8",
+        "order": 3,
+        "width": "6",
+        "height": 1
+    },
+    {
+        "id": "77747c1dc588a903",
+        "type": "ui_spacer",
+        "z": "1ebb5ce194f7fd37",
+        "name": "spacer",
+        "group": "1ae8bac4.895bf5",
+        "order": 2,
+        "width": "6",
+        "height": 1
+    },
+    {
+        "id": "6157158d0c8e24e7",
+        "type": "ui_spacer",
+        "z": "1ebb5ce194f7fd37",
+        "name": "spacer",
+        "group": "85a386ea.e008e8",
+        "order": 5,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "a1fcb2bf80916e66",
+        "type": "ui_spacer",
+        "z": "1ebb5ce194f7fd37",
+        "name": "spacer",
+        "group": "1ae8bac4.895bf5",
+        "order": 5,
+        "width": "6",
+        "height": "1"
+    },
+    {
+        "id": "debdc3b74d030ca1",
+        "type": "ui_group",
+        "name": "PPE Detection",
+        "tab": "ac74fa43.681e68",
+        "order": 8,
+        "disp": true,
+        "width": "18",
+        "collapse": false
+    },
+    {
+        "id": "51776030d6d02ffd",
+        "type": "ui_spacer",
+        "z": "1ebb5ce194f7fd37",
+        "name": "spacer",
+        "group": "debdc3b74d030ca1",
+        "order": 1,
+        "width": "3",
+        "height": "3"
+    },
+    {
+        "id": "bc480bade87ea576",
+        "type": "ui_spacer",
+        "z": "1ebb5ce194f7fd37",
+        "name": "spacer",
+        "group": "debdc3b74d030ca1",
+        "order": 3,
+        "width": "3",
+        "height": "3"
+    },
+    {
+        "id": "1e512596.02075a",
+        "type": "mqtt-broker",
+        "name": "Mosquitto",
+        "broker": "192.168.1.40",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "compatmode": true,
+        "keepalive": "60",
+        "cleansession": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": ""
+    },
+    {
+        "id": "17ac3ae5.57e2b5",
+        "type": "ui_group",
+        "name": "Slideshow",
+        "tab": "bd8473ae.131f1",
+        "order": 1,
+        "disp": false,
+        "width": "28",
+        "collapse": false
+    },
+    {
+        "id": "bd8473ae.131f1",
+        "type": "ui_tab",
+        "name": "Slide",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "d2e998ef.e44f08",
+        "type": "ui_group",
+        "name": "Slideshow",
+        "tab": "b123e6c8.d3e948",
+        "order": 1,
+        "disp": true,
+        "width": "10",
+        "collapse": false
+    },
+    {
+        "id": "b123e6c8.d3e948",
+        "type": "ui_tab",
+        "name": "Slide",
+        "icon": "dashboard",
+        "order": 1,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "6ff67d7f.e50f64",
+        "type": "change",
+        "z": "eb90c25d.78d73",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "restore",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 589.5,
+        "y": 53,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c16267f4.7bfdb8",
+        "type": "json",
+        "z": "eb90c25d.78d73",
+        "name": "",
+        "x": 175.5,
+        "y": 85,
+        "wires": [
+            [
+                "6ff67d7f.e50f64"
+            ]
+        ]
+    },
+    {
+        "id": "7b770fac.4b0da",
+        "type": "catch",
+        "z": "eb90c25d.78d73",
+        "name": "",
+        "scope": [
+            "c16267f4.7bfdb8"
+        ],
+        "x": 183.5,
+        "y": 117,
+        "wires": [
+            [
+                "b7b8b41b.a349e8"
+            ]
+        ]
+    },
+    {
+        "id": "b7b8b41b.a349e8",
+        "type": "change",
+        "z": "eb90c25d.78d73",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 354.5,
+        "y": 116,
+        "wires": [
+            [
+                "6ff67d7f.e50f64"
+            ]
+        ]
+    },
+    {
+        "id": "a685b6d4.ee5098",
+        "type": "inject",
+        "z": "eb90c25d.78d73",
+        "name": "Trigger restore",
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 618.5,
+        "y": 169,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e5024b07.2ad2f8",
+        "type": "comment",
+        "z": "c0600a7e.657098",
+        "name": "Broker",
+        "info": "",
+        "x": 127,
+        "y": 37,
+        "wires": []
+    },
+    {
+        "id": "141961b4.c59c0e",
+        "type": "debug",
+        "z": "c0600a7e.657098",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 320,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "436facfc.d6fbe4",
+        "type": "aedes broker",
+        "z": "c0600a7e.657098",
+        "name": "Meraki",
+        "mqtt_port": 1883,
+        "mqtt_ws_port": "",
+        "cert": "",
+        "key": "",
+        "certname": "",
+        "keyname": "",
+        "dburl": "",
+        "usetls": false,
+        "x": 110,
+        "y": 140,
+        "wires": [
+            [
+                "141961b4.c59c0e"
+            ]
+        ]
+    },
+    {
+        "id": "4510ff18.94d13",
+        "type": "json",
+        "z": "ea6cd974.87a928",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 410,
+        "y": 260,
+        "wires": [
+            [
+                "9601626c.910b6"
+            ]
+        ]
+    },
+    {
+        "id": "9601626c.910b6",
+        "type": "change",
+        "z": "ea6cd974.87a928",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.lux",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 760,
+        "y": 260,
+        "wires": [
+            [
+                "8e23a9b7.a69908",
+                "a905479b.7a1638"
+            ]
+        ]
+    },
+    {
+        "id": "f2959a43.164788",
+        "type": "mqtt in",
+        "z": "ea6cd974.87a928",
+        "name": "",
+        "topic": "/merakimv/Q2HV-UB8N-MVKW/light",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "4510ff18.94d13",
+                "43d67458.81bb3c"
+            ]
+        ]
+    },
+    {
+        "id": "a905479b.7a1638",
+        "type": "ui_chart",
+        "z": "ea6cd974.87a928",
+        "name": "Historic Luminosity",
+        "group": "85a386ea.e008e8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "label": "<center><font color=grey><small>Historic Luminosity",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": "2",
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "x": 990,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d6dab51a.bdaf88",
+        "type": "comment",
+        "z": "ea6cd974.87a928",
+        "name": "Luminosity at /UI",
+        "info": "",
+        "x": 140,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "8e23a9b7.a69908",
+        "type": "ui_gauge",
+        "z": "ea6cd974.87a928",
+        "name": "Instantaneous Luminosity",
+        "group": "85a386ea.e008e8",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "gtype": "gage",
+        "title": "<center><font color=grey><small>Instantaneous Luminosity",
+        "label": "Lumen",
+        "format": "",
+        "min": 0,
+        "max": "1500",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 1040,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "43d67458.81bb3c",
+        "type": "debug",
+        "z": "ea6cd974.87a928",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 380,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "cc1701af.4167b",
+        "type": "ui_template",
+        "z": "ea6cd974.87a928",
+        "group": "85a386ea.e008e8",
+        "name": "",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "format": "<!doctype html>\n\n<html>\n\n<head>\n    <style>\n        \n        #LAB_G2_cards {\n            font-size: 2px;\n        \n        }\n    </style>\n</head>\n\n<body></body>\n\n</html>",
+        "storeOutMessages": false,
+        "fwdInMessages": false,
+        "templateScope": "local",
+        "x": 717,
+        "y": 404,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8e5205e3.8d3f68",
+        "type": "json",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 440,
+        "y": 320,
+        "wires": [
+            [
+                "4f14762f.eac0e8"
+            ]
+        ]
+    },
+    {
+        "id": "4f14762f.eac0e8",
+        "type": "change",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.counts.person",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 660,
+        "y": 320,
+        "wires": [
+            [
+                "548ab73f.3c7df8"
+            ]
+        ]
+    },
+    {
+        "id": "84d6208b.9b91c",
+        "type": "mqtt in",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "topic": "/merakimv/Q2HV-UB8N-MVKW/671599294431625455",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 280,
+        "y": 400,
+        "wires": [
+            [
+                "8e5205e3.8d3f68"
+            ]
+        ]
+    },
+    {
+        "id": "548ab73f.3c7df8",
+        "type": "ui_chart",
+        "z": "61091657.7ee5f8",
+        "name": "People Count Zone 1",
+        "group": "1ae8bac4.895bf5",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "label": "<font color=grey><small>Historic People Count Over 1 Minute",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "60",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 930,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "620608e7.13ff28",
+        "type": "json",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 430,
+        "y": 480,
+        "wires": [
+            [
+                "d6c4ae24.b81fe"
+            ]
+        ]
+    },
+    {
+        "id": "d6c4ae24.b81fe",
+        "type": "change",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "payload.counts.person",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 650,
+        "y": 480,
+        "wires": [
+            [
+                "e6172107.146c4"
+            ]
+        ]
+    },
+    {
+        "id": "b3aefc0f.24523",
+        "type": "mqtt in",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "topic": "/merakimv/Q2HV-UB8N-MVKW/671599294431625455",
+        "qos": "0",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 290,
+        "y": 560,
+        "wires": [
+            [
+                "620608e7.13ff28",
+                "ac7101f7.d00ee"
+            ]
+        ]
+    },
+    {
+        "id": "e6172107.146c4",
+        "type": "ui_chart",
+        "z": "61091657.7ee5f8",
+        "name": "People Count Zone 2",
+        "group": "1ae8bac4.895bf5",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "label": "<font color=grey><small>Historic People Count Over 1 Hour",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "step",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "x": 920,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ac7101f7.d00ee",
+        "type": "debug",
+        "z": "61091657.7ee5f8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "x": 620,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "5a442fc4.fde3",
+        "type": "mqtt in",
+        "z": "9ae91178.85918",
+        "name": "",
+        "topic": "Age",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 340,
+        "y": 120,
+        "wires": [
+            [
+                "4105f36f.2046ac",
+                "8464c6f9.25ae98"
+            ]
+        ]
+    },
+    {
+        "id": "4105f36f.2046ac",
+        "type": "debug",
+        "z": "9ae91178.85918",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "15bc5c1e.e55da4",
+        "type": "mqtt in",
+        "z": "9ae91178.85918",
+        "name": "",
+        "topic": "EmotionalState",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 370,
+        "y": 220,
+        "wires": [
+            [
+                "ed8def72.7b46c",
+                "b51331ba.3f469"
+            ]
+        ]
+    },
+    {
+        "id": "ed8def72.7b46c",
+        "type": "debug",
+        "z": "9ae91178.85918",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 570,
+        "y": 311,
+        "wires": []
+    },
+    {
+        "id": "8464c6f9.25ae98",
+        "type": "ui_gauge",
+        "z": "9ae91178.85918",
+        "name": "Age",
+        "group": "2f647a84.4b28b6",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "gtype": "donut",
+        "title": "<font color=grey><small>Age",
+        "label": "Years",
+        "format": "{{value}}",
+        "min": "0",
+        "max": "99",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 500,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "b51331ba.3f469",
+        "type": "ui_text",
+        "z": "9ae91178.85918",
+        "group": "2f647a84.4b28b6",
+        "order": 1,
+        "width": "5",
+        "height": "4",
+        "name": "Emotional State",
+        "label": "<font color=grey><large>Emotional State",
+        "format": "<font color=white><large>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 588,
+        "y": 190,
+        "wires": []
+    },
+    {
+        "id": "95bd9949.ff2f98",
+        "type": "mqtt in",
+        "z": "9ae91178.85918",
+        "name": "",
+        "topic": "Gender",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 350,
+        "y": 480,
+        "wires": [
+            [
+                "83003147.da135"
+            ]
+        ]
+    },
+    {
+        "id": "83003147.da135",
+        "type": "ui_text",
+        "z": "9ae91178.85918",
+        "group": "2f647a84.4b28b6",
+        "order": 2,
+        "width": "5",
+        "height": "4",
+        "name": "Gender",
+        "label": "<font color=grey><large>Gender",
+        "format": "<font color=white><large>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 580,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "c168636.4a33fa",
+        "type": "mqtt in",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "topic": "Label0",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 210,
+        "y": 200,
+        "wires": [
+            [
+                "9fe83222.5d9d8",
+                "1d10af1e.bf94f1"
+            ]
+        ]
+    },
+    {
+        "id": "9fe83222.5d9d8",
+        "type": "debug",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 450,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1d10af1e.bf94f1",
+        "type": "ui_text",
+        "z": "fe39d94e.aff738",
+        "group": "8fbf59aa.45bee8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Label 1",
+        "label": "<font color=grey><small>Object 1",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 460,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b4f9c86c.4d2e88",
+        "type": "mqtt in",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "topic": "Label1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 230,
+        "y": 400,
+        "wires": [
+            [
+                "894da641.bfde28",
+                "762c7097.b9d41"
+            ]
+        ]
+    },
+    {
+        "id": "894da641.bfde28",
+        "type": "debug",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 470,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "762c7097.b9d41",
+        "type": "ui_text",
+        "z": "fe39d94e.aff738",
+        "group": "8fbf59aa.45bee8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Label 2",
+        "label": "<font color=grey><small>Object 2",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 480,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "fac0ac0b.474a3",
+        "type": "mqtt in",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "topic": "Label2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 230,
+        "y": 600,
+        "wires": [
+            [
+                "2ecc3f45.127ee",
+                "a8e60efa.2d096"
+            ]
+        ]
+    },
+    {
+        "id": "2ecc3f45.127ee",
+        "type": "debug",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 470,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "a8e60efa.2d096",
+        "type": "ui_text",
+        "z": "fe39d94e.aff738",
+        "group": "8fbf59aa.45bee8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Label 3",
+        "label": "<font color=grey><small>Object 3",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 480,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "6f9a41d3.f0cc6",
+        "type": "mqtt in",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "topic": "Label3",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 230,
+        "y": 820,
+        "wires": [
+            [
+                "35c38f.93a83c72",
+                "fec47322.d8c8e"
+            ]
+        ]
+    },
+    {
+        "id": "35c38f.93a83c72",
+        "type": "debug",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 470,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "fec47322.d8c8e",
+        "type": "ui_text",
+        "z": "fe39d94e.aff738",
+        "group": "8fbf59aa.45bee8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Label 4",
+        "label": "<font color=grey><small>Object 4",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 480,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "8f9012e3.342a",
+        "type": "mqtt in",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "topic": "Label4",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 230,
+        "y": 1020,
+        "wires": [
+            [
+                "109592c4.73017d",
+                "d168c29d.08b1b"
+            ]
+        ]
+    },
+    {
+        "id": "109592c4.73017d",
+        "type": "debug",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 470,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "d168c29d.08b1b",
+        "type": "ui_text",
+        "z": "fe39d94e.aff738",
+        "group": "8fbf59aa.45bee8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Label 5",
+        "label": "<font color=grey><small>Object 5",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 480,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "49004b12.b1f6b4",
+        "type": "mqtt in",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "topic": "Label5",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 250,
+        "y": 1220,
+        "wires": [
+            [
+                "c32fd0b6.cafa6",
+                "8794aa1b.ef5488"
+            ]
+        ]
+    },
+    {
+        "id": "c32fd0b6.cafa6",
+        "type": "debug",
+        "z": "fe39d94e.aff738",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 490,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "8794aa1b.ef5488",
+        "type": "ui_text",
+        "z": "fe39d94e.aff738",
+        "group": "8fbf59aa.45bee8",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "Label 6",
+        "label": "<font color=grey><small>Object 6",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 500,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "41fbed47.814504",
+        "type": "mqtt in",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "topic": "DetectedText0",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": false,
+        "rh": "0",
+        "x": 286,
+        "y": 128,
+        "wires": [
+            [
+                "3cbdae46.8bac42",
+                "ecdfb723.46b558"
+            ]
+        ]
+    },
+    {
+        "id": "3cbdae46.8bac42",
+        "type": "debug",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 507,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "ecdfb723.46b558",
+        "type": "ui_text",
+        "z": "bd3844a1.c393b8",
+        "group": "58564007.5d9af",
+        "order": 1,
+        "width": "0",
+        "height": "0",
+        "name": "DetectedText 1",
+        "label": "<font color=grey><small>Detected Text 1",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 537,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "b5b2204f.6fa0c",
+        "type": "mqtt in",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "topic": "DetectedText1",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 299,
+        "y": 317,
+        "wires": [
+            [
+                "e9908196.bea02",
+                "78311248.af0a5c"
+            ]
+        ]
+    },
+    {
+        "id": "e9908196.bea02",
+        "type": "debug",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 509,
+        "y": 317,
+        "wires": []
+    },
+    {
+        "id": "78311248.af0a5c",
+        "type": "ui_text",
+        "z": "bd3844a1.c393b8",
+        "group": "58564007.5d9af",
+        "order": 2,
+        "width": "0",
+        "height": "0",
+        "name": "DetectedText 2",
+        "label": "<font color=grey><small>Detected Text 2",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 539,
+        "y": 437,
+        "wires": []
+    },
+    {
+        "id": "2e735521.744e6a",
+        "type": "mqtt in",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "topic": "DetectedText2",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 301,
+        "y": 506,
+        "wires": [
+            [
+                "429a1d56.b1efa4",
+                "9b97ddef.61b01"
+            ]
+        ]
+    },
+    {
+        "id": "429a1d56.b1efa4",
+        "type": "debug",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 511,
+        "y": 506,
+        "wires": []
+    },
+    {
+        "id": "9b97ddef.61b01",
+        "type": "ui_text",
+        "z": "bd3844a1.c393b8",
+        "group": "58564007.5d9af",
+        "order": 3,
+        "width": "0",
+        "height": "0",
+        "name": "DetectedText 3",
+        "label": "<font color=grey><small>Detected Text 3",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 541,
+        "y": 626,
+        "wires": []
+    },
+    {
+        "id": "9853c226.1fa1d",
+        "type": "mqtt in",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "topic": "DetectedText3",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 313,
+        "y": 677,
+        "wires": [
+            [
+                "64b3bd59.045ad4",
+                "fe24ce05.8b795"
+            ]
+        ]
+    },
+    {
+        "id": "64b3bd59.045ad4",
+        "type": "debug",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 523,
+        "y": 677,
+        "wires": []
+    },
+    {
+        "id": "fe24ce05.8b795",
+        "type": "ui_text",
+        "z": "bd3844a1.c393b8",
+        "group": "58564007.5d9af",
+        "order": 4,
+        "width": "0",
+        "height": "0",
+        "name": "DetectedText 4",
+        "label": "<font color=grey><small>Detected Text 4",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 553,
+        "y": 797,
+        "wires": []
+    },
+    {
+        "id": "7d31e361.2bd78c",
+        "type": "mqtt in",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "topic": "DetectedText4",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 320,
+        "y": 863,
+        "wires": [
+            [
+                "a233800d.0fcfc",
+                "81fc48be.7a8ca8"
+            ]
+        ]
+    },
+    {
+        "id": "a233800d.0fcfc",
+        "type": "debug",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 530,
+        "y": 863,
+        "wires": []
+    },
+    {
+        "id": "81fc48be.7a8ca8",
+        "type": "ui_text",
+        "z": "bd3844a1.c393b8",
+        "group": "58564007.5d9af",
+        "order": 5,
+        "width": "0",
+        "height": "0",
+        "name": "DetectedText 5",
+        "label": "<font color=grey><small>Detected Text 5",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 560,
+        "y": 983,
+        "wires": []
+    },
+    {
+        "id": "fdb8ed17.cf1c8",
+        "type": "mqtt in",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "topic": "DetectedText5",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 330,
+        "y": 1049,
+        "wires": [
+            [
+                "3d05bee2.c81ac2",
+                "e91781.a75f288"
+            ]
+        ]
+    },
+    {
+        "id": "3d05bee2.c81ac2",
+        "type": "debug",
+        "z": "bd3844a1.c393b8",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "x": 540,
+        "y": 1049,
+        "wires": []
+    },
+    {
+        "id": "e91781.a75f288",
+        "type": "ui_text",
+        "z": "bd3844a1.c393b8",
+        "group": "58564007.5d9af",
+        "order": 6,
+        "width": "0",
+        "height": "0",
+        "name": "DetectedText 6",
+        "label": "<font color=grey><small>Detected Text 6",
+        "format": "<font color=white><small>{{msg.payload}}",
+        "layout": "row-spread",
+        "x": 570,
+        "y": 1169,
+        "wires": []
+    },
+    {
+        "id": "1f1a741842ab60bb",
+        "type": "ui_template",
+        "z": "19055804.82a728",
+        "group": "679df91d.8517c8",
+        "name": "Logo / Clock",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "format": "<script id=\"clockScript1\" type=\"text/javascript\">\n    var clockInterval;\n    $(function () {\n        if (clockInterval) return;\n\n        //add logo\n        var div1 = $('<div/>');\n        var logo = new Image();\n        \n        //change url for custom logo!\n        logo.src = 'https://protosnetworks.com/wp-content/themes/goodcalltheme/assets/img/logo-blue-small.png'\n        logo.height = 60;\n        div1[0].style.margin = '10px auto';\n\n        div1.append(logo);\n\n        //add clock\n        var div2 = $('<div/>');\n        var p = $('<p/>');\n\n        div2.append(p);\n        div2[0].style.margin = '5px';\n\n        function displayTime() {\n            p.text(new Date().toLocaleString());\n        }\n        \n        clockInterval = setInterval(displayTime, 1000);\n\n        //add to toolbar when it's available\n        var addToToolbarTimer;\n        \n        function addToToolbar() {\n            var toolbar = $('.md-toolbar-tools');\n            \n            if(!toolbar.length) return;\n            \n            toolbar.append(div1);\n            toolbar.append(div2);\n            clearInterval(addToToolbarTimer);\n        }\n        addToToolbarTimer = setInterval(addToToolbar, 100);\n    });\n</script>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "global",
+        "x": 450,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ccea8479b8256b8d",
+        "type": "ui_template",
+        "z": "22170bc2d615633b",
+        "group": "ded320e11037f2ec",
+        "name": "",
+        "order": 1,
+        "width": "12",
+        "height": "6",
+        "format": "<div ng-bind-html=\"msg.payload | trusted\"></div>",
+        "storeOutMessages": true,
+        "fwdInMessages": true,
+        "resendOnRefresh": false,
+        "templateScope": "local",
+        "x": 620,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "f53606f261a04feb",
+        "type": "mqtt in",
+        "z": "22170bc2d615633b",
+        "name": "",
+        "topic": "Snap",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "x": 290,
+        "y": 240,
+        "wires": [
+            [
+                "a52cd653ca39ee30"
+            ]
+        ]
+    },
+    {
+        "id": "a52cd653ca39ee30",
+        "type": "template",
+        "z": "22170bc2d615633b",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<iframe src=\"{{{payload}}}\"  height=500px; width=600px >\n    content will be rendered here...\n</iframe>",
+        "x": 480,
+        "y": 240,
+        "wires": [
+            [
+                "ccea8479b8256b8d"
+            ]
+        ]
+    },
+    {
+        "id": "4d3dfae2bb264b2e",
+        "type": "ui_gauge",
+        "z": "1ebb5ce194f7fd37",
+        "name": "Face Mask Detection",
+        "group": "debdc3b74d030ca1",
+        "order": 4,
+        "width": "5",
+        "height": "3",
+        "gtype": "donut",
+        "title": "<font color=grey><small>Face Mask Detection",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff2600",
+            "#e6e600",
+            "#50b232"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 580,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f8e092a1af63493f",
+        "type": "ui_gauge",
+        "z": "1ebb5ce194f7fd37",
+        "name": "Hat Detection",
+        "group": "debdc3b74d030ca1",
+        "order": 2,
+        "width": "5",
+        "height": "3",
+        "gtype": "donut",
+        "title": "<font color=grey><small>Hard Hat Detection",
+        "label": "%",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#ff2600",
+            "#e6e600",
+            "#50b232"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "x": 500,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1c1af7c2f1903c07",
+        "type": "ui_text",
+        "z": "1ebb5ce194f7fd37",
+        "group": "e47ba82f96e4d60e",
+        "order": 2,
+        "width": "16",
+        "height": "2",
+        "name": "Test",
+        "label": "",
+        "format": "<center><font color=grey><small>All Meraki camera footage is automatically deleted after 24 hours. We have opted out AWS AI improvement services that may store and process image data. All processing is computed within EU regions.",
+        "layout": "row-left",
+        "x": 1050,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "f2416587ee5d0efe",
+        "type": "comment",
+        "z": "e9251f75a3308957",
+        "d": true,
+        "name": "to do: add error handling for directory empty",
+        "info": "",
+        "x": 310,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "e4358d5c21f1a3e2",
+        "type": "ui_media",
+        "z": "e9251f75a3308957",
+        "group": "17ac3ae5.57e2b5",
+        "name": "Meraki Range ",
+        "width": "28",
+        "height": "14",
+        "order": 1,
+        "category": "About",
+        "file": "Meraki Models.png",
+        "layout": "center",
+        "showcontrols": true,
+        "loop": true,
+        "onstart": false,
+        "scope": "local",
+        "tooltip": "",
+        "x": 600,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "3bb34ef7c1ef08f7",
+        "type": "mqtt in",
+        "z": "1ebb5ce194f7fd37",
+        "name": "",
+        "topic": "hard_hat_ppe",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 130,
+        "y": 260,
+        "wires": [
+            [
+                "f8e092a1af63493f"
+            ]
+        ]
+    },
+    {
+        "id": "64d850da329c45d9",
+        "type": "mqtt in",
+        "z": "1ebb5ce194f7fd37",
+        "name": "",
+        "topic": "mask_ppe",
+        "qos": "2",
+        "datatype": "auto",
+        "broker": "b2fd4c0c.8b0d2",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "x": 260,
+        "y": 340,
+        "wires": [
+            [
+                "4d3dfae2bb264b2e"
+            ]
+        ]
+    },
+    {
+        "id": "a42b7fd8b73f6844",
+        "type": "ui_text",
+        "z": "1ebb5ce194f7fd37",
+        "group": "e47ba82f96e4d60e",
+        "order": 1,
+        "width": "16",
+        "height": "1",
+        "name": "demo",
+        "label": "",
+        "format": "This demo uses Meraki’s APIs to send MV sensor data to a relay server and snapshots for image analysis to AWS Rekognition. This solution can detect light levels, objects, text, PPE and provide facial analysis to secure premises and office environments. ",
+        "layout": "row-left",
+        "x": 1050,
+        "y": 240,
+        "wires": []
+    }
+]
