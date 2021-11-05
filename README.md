@@ -4,7 +4,7 @@ This project uses Meraki’s built-in APIs and MQTT services to send MV sensor d
 
  ![Alt text](/diagrams/dashboard.png "UI Dashboard")
 
-I also developed PPE detection to recognise face mask and hard hat protection within the image.
+In addition, PPE detection was developed to recognise face mask and hard hat protection within the image.
 
 The information then is presented in a UI dashboard (Node-RED) or with alerts configured to messaging platforms for greater visibility and instant detection of threats.
 
